@@ -28,16 +28,7 @@ public class MainActivity extends AppCompatActivity {
 
         Realm.init(getApplicationContext());
         helper = new RealmHelper();
-        if(helper.checkFirstTime()){
-            //First time user
-            System.out.println("Check: is Empty");
-//            helper.initData(getApplicationContext());
-            helper.insertData(getApplicationContext());
-        } else {
-            // Already init data
-            System.out.println("Check: not Empty");
-            helper.insertData(getApplicationContext());
-        }
+        helper.insertData(MainActivity.this);
 
 
 

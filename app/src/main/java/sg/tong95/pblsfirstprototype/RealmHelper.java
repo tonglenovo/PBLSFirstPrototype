@@ -41,11 +41,14 @@ public class RealmHelper {
     }
 
     public boolean checkUpdate(){
+
+        // newVersion is taking from json
+
         int newVersion = 12;
         RealmResults<UpdateCode>results = realm.where(UpdateCode.class).findAll();
         int currentVersion = results.get(0).getSpeakerCode();
         System.out.println("Check Update: " + String.valueOf(results.get(0).getSpeakerCode()));
-        if(newVersion < currentVersion){
+        if(newVersion > currentVersion){
             System.out.println("Check Update: true");
             return true;
         } else{
@@ -64,17 +67,30 @@ public class RealmHelper {
     }
 
     public void insertData(Context context){
-        RealmResults<UpdateCode>results = realm.where(UpdateCode.class).findAll();
-        if(results.isEmpty()){
+
+        if(checkFirstTime()){
             System.out.println("Had no value");
             initData(context);
         } else {
             if(checkUpdate()){
+                System.out.println("Have new update");
                 deleteData();
                 insertData(context);
+            } else {
+                System.out.println("No update");
             }
-            System.out.println("deleteData, insertData, getData");
         }
+
+//        RealmResults<UpdateCode>results = realm.where(UpdateCode.class).findAll();
+//        if(results.isEmpty()){
+//            System.out.println("Had no value");
+//            initData(context);
+//        } else {
+//            if(checkUpdate()){
+//
+//            }
+//            System.out.println("deleteData, insertData, getData");
+//        }
     }
 
     public void deleteData(){
