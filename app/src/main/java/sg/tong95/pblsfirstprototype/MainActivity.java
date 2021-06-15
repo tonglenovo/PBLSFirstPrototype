@@ -2,6 +2,7 @@ package sg.tong95.pblsfirstprototype;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
@@ -27,9 +28,8 @@ public class MainActivity extends AppCompatActivity {
         // checkInternet false ask user to connect wifi and try again.
 
         Realm.init(getApplicationContext());
-        helper = new RealmHelper();
-        helper.insertData(MainActivity.this);
-
+        helper = new RealmHelper(MainActivity.this);
+        helper.testClass();
 
 
     }
@@ -61,9 +61,10 @@ public class MainActivity extends AppCompatActivity {
         ivSpeaker.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+               helper.getSpeakerName();
                 //Toast.makeText(getApplicationContext(), "Speaker", Toast.LENGTH_SHORT).show();
-                Intent i = new Intent(MainActivity.this, SpeakerActivity.class);
-                startActivity(i);
+//                Intent i = new Intent(MainActivity.this, SpeakerActivity.class);
+//                startActivity(i);
             }
         });
 

@@ -23,8 +23,8 @@ public class SpeakerDetail extends AppCompatActivity {
         setContentView(R.layout.activity_speaker_detail);
 
         String id = getIntent().getStringExtra("id");
-        helper = new RealmHelper();
-        speaker = helper.getSpeakerByID(id);
+        //helper = new RealmHelper();
+//        speaker = helper.getSpeakerByID(id);
 
         tvSpeakerDetailName = findViewById(R.id.tvSpeakerDetailName);
         tvSpeakerDetailDesc = findViewById(R.id.tvSpeakerDetailDesc);
