@@ -27,8 +27,8 @@ public class SpeakerActivity extends AppCompatActivity {
 
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
-//        helper = new RealmHelper();
-//        list = helper.getAllSpeaker();
+        helper = new RealmHelper(SpeakerActivity.this);
+        list = helper.getAllSpeaker();
 
         rvSpeaker = findViewById(R.id.rvSpeaker);
         rvSpeaker.setHasFixedSize(true);

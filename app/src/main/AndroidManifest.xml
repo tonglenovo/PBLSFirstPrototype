@@ -13,12 +13,18 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.PBLSFirstPrototype">
-        <activity android:name=".SpeakerDetail"
-            android:parentActivityName=".SpeakerActivity"></activity>
+        <activity
+            android:name=".ProgrammeActivity"
+            android:label="@string/title_activity_programme"
+            android:theme="@style/Theme.PBLSFirstPrototype.NoActionBar"></activity>
+        <activity
+            android:name=".SpeakerDetail"
+            android:parentActivityName=".SpeakerActivity" />
         <activity
             android:name=".SpeakerActivity"
             android:parentActivityName=".MainActivity" />
-        <activity android:name=".MainActivity"
+        <activity
+            android:name=".MainActivity"
             android:configChanges="orientation"
             android:screenOrientation="portrait">
             <intent-filter>

@@ -29,7 +29,7 @@ public class MainActivity extends AppCompatActivity {
 
         Realm.init(getApplicationContext());
         helper = new RealmHelper(MainActivity.this);
-        helper.testClass();
+        helper.testTrial(MainActivity.this);
 
 
     }
@@ -47,7 +47,9 @@ public class MainActivity extends AppCompatActivity {
         ivProgramme.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Toast.makeText(getApplicationContext(), "Programme", Toast.LENGTH_SHORT).show();
+                //Toast.makeText(getApplicationContext(), "Programme", Toast.LENGTH_SHORT).show();
+                Intent i = new Intent(MainActivity.this, ProgrammeActivity.class);
+                startActivity(i);
             }
         });
 
@@ -61,10 +63,9 @@ public class MainActivity extends AppCompatActivity {
         ivSpeaker.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-               helper.getSpeakerName();
                 //Toast.makeText(getApplicationContext(), "Speaker", Toast.LENGTH_SHORT).show();
-//                Intent i = new Intent(MainActivity.this, SpeakerActivity.class);
-//                startActivity(i);
+                Intent i = new Intent(MainActivity.this, SpeakerActivity.class);
+                startActivity(i);
             }
         });
 
