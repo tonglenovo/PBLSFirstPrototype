@@ -13,10 +13,14 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.PBLSFirstPrototype">
+        <activity android:name=".ProgrammeDetailActivity"
+            android:parentActivityName=".ProgrammeActivity"></activity>
+        <activity android:name=".PresentationActivity"
+            android:parentActivityName=".MainActivity"/>
         <activity
             android:name=".ProgrammeActivity"
             android:label="@string/title_activity_programme"
-            android:theme="@style/Theme.PBLSFirstPrototype.NoActionBar"></activity>
+            android:theme="@style/Theme.PBLSFirstPrototype.NoActionBar" />
         <activity
             android:name=".SpeakerDetail"
             android:parentActivityName=".SpeakerActivity" />

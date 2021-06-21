@@ -237,19 +237,63 @@ public class RealmHelper {
         return realm.where(Speaker.class).equalTo("speaker_id", id).findFirst();
     }
 
+    public String getSpeakerNameByIDString(String id){
+        return realm.where(Speaker.class).equalTo("speaker_id", id).findFirst().getName();
+    }
+
+    public Event getEventByID(String id){
+        return realm.where(Event.class).equalTo("id",id).findFirst();
+    }
+
+    public List<Presentation> getAllPresentation(){
+        return realm.where(Presentation.class).findAll();
+    }
+
+    public List<Event> getEventFromPresentationDay(String presentation, String days){
+        RealmResults<Event> results;
+        switch (days){
+            case "Day 1":
+                 results = realm.where(Event.class).equalTo("presentation_id", presentation).equalTo("days_id","1").findAll();
+                break;
+            case "Day 2":
+                results = realm.where(Event.class).equalTo("presentation_id", presentation).equalTo("days_id","2").findAll();
+                break;
+            case "Day 3":
+                results = realm.where(Event.class).equalTo("presentation_id", presentation).equalTo("days_id","3").findAll();
+                break;
+            default:
+                throw new IllegalStateException("Unexpected value: " + days);
+        }
+//        return realm.where(Event.class).equalTo("presentation_id", presentation).equalTo("days_id","2").findAll();
+        return results;
+    }
+
     public List<Event> getEventByDay(String days){
         RealmResults<Event> results;
         System.out.println("Days: " + days);
         RealmResults results1 = realm.where(Event.class).findAll();
         System.out.println(results1.isEmpty());
         System.out.println("event size: " + results1.size());
-        if(days.equals("Day 1")){
-            results = realm.where(Event.class).equalTo("days_id","1").findAll();
-        } else if(days.equals("Day 2")){
-            results = realm.where(Event.class).equalTo("days_id","2").findAll();
-        } else {
-            results = realm.where(Event.class).equalTo("days_id","3").findAll();
+        switch (days){
+            case "Day 1":
+                results = realm.where(Event.class).equalTo("days_id","1").findAll();
+                break;
+            case "Day 2":
+                results = realm.where(Event.class).equalTo("days_id","2").findAll();
+                break;
+            case "Day 3":
+                results = realm.where(Event.class).equalTo("days_id","3").findAll();
+                break;
+            default:
+                throw new IllegalStateException("Unexpected value: " + days);
         }
+//        if(days.equals("Day 1")){
+//
+//        } else if(days.equals("Day 2")){
+//
+//        } else {
+//
+//        }
         return results;
     }
 

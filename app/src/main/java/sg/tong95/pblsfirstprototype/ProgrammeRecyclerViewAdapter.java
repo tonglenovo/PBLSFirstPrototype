@@ -9,6 +9,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -61,8 +62,10 @@ public class ProgrammeRecyclerViewAdapter extends RecyclerView.Adapter<Programme
     public void onBindViewHolder(@NonNull ProgrammeRecyclerViewAdapter.ViewHolder holder, int position) {
         Event event = events.get(position);
         System.out.println("Check: " + event.getDate());
+        System.out.println("Check Position: " + String.valueOf(position));
         holder.tvEventTitle.setText(event.getTitle());
         holder.tvEventStartTime.setText(event.getDate() + " " + event.getStartTime());
+
         if(event.getPresentation_id().equals("1")){
             Glide.with(context).load(R.drawable.seminar).into(holder.ivEventImage);
         } else if(event.getPresentation_id().equals("2")){
@@ -76,15 +79,19 @@ public class ProgrammeRecyclerViewAdapter extends RecyclerView.Adapter<Programme
 
 
 
-//        holder.itemView.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
+        holder.itemView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Toast.makeText(context, String.valueOf(position),Toast.LENGTH_SHORT).show();
+                Intent i = new Intent(context, ProgrammeDetailActivity.class);
+                i.putExtra("event_id", event.getId());
+                context.startActivity(i);
 //                Intent i = new Intent(context, SpeakerDetail.class);
 //                i.putExtra("id", speaker.getSpeaker_id());
 //                context.startActivity(i);
 //                System.out.println(speaker.getName() + " Is tapped");
-//            }
-//        });
+            }
+        });
     }
 
     @Override

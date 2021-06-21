@@ -49,6 +49,7 @@ public class MainActivity extends AppCompatActivity {
             public void onClick(View v) {
                 //Toast.makeText(getApplicationContext(), "Programme", Toast.LENGTH_SHORT).show();
                 Intent i = new Intent(MainActivity.this, ProgrammeActivity.class);
+                i.putExtra("name", "programme");
                 startActivity(i);
             }
         });
@@ -56,7 +57,9 @@ public class MainActivity extends AppCompatActivity {
         ivPresentation.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Toast.makeText(getApplicationContext(), "Presentation", Toast.LENGTH_SHORT).show();
+                //Toast.makeText(getApplicationContext(), "Presentation", Toast.LENGTH_SHORT).show();
+                Intent i = new Intent(MainActivity.this, PresentationActivity.class);
+                startActivity(i);
             }
         });
 

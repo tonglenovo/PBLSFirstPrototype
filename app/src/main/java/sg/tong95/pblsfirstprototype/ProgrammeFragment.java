@@ -3,6 +3,7 @@ package sg.tong95.pblsfirstprototype;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.DividerItemDecoration;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -25,6 +26,7 @@ public class ProgrammeFragment extends Fragment {
     RealmHelper helper;
     RecyclerView rvEventList;
     ProgrammeRecyclerViewAdapter adapter;
+    RecyclerView.LayoutManager layoutManager;
     List<Event> eventList;
 
     // TODO: Rename parameter arguments, choose names that match
@@ -58,6 +60,7 @@ public class ProgrammeFragment extends Fragment {
         return fragment;
     }
 
+
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -71,16 +74,45 @@ public class ProgrammeFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        Realm.init(getContext());
-        helper = new RealmHelper(getContext());
-        eventList = helper.getTest();
         View view = inflater.inflate(R.layout.fragment_programme2, container, false);
-        rvEventList = view.findViewById(R.id.rvEventList);
-        System.out.println("Check mParam1: " + mParam1);
-        System.out.println("Check1: " + eventList.size());
-        adapter = new ProgrammeRecyclerViewAdapter(getContext(), helper.getEventByDay(mParam1));
-        rvEventList.setLayoutManager(new LinearLayoutManager(getContext()));
-        rvEventList.setAdapter(adapter);
+
+        String name = getActivity().getIntent().getStringExtra("name");
+        String p_id = getActivity().getIntent().getStringExtra("p_id");
+        System.out.println("name: " + name);
+
+        if(name == null){
+            name = "programme";
+        }
+
+        if(name.equals("presentation")){
+            Realm.init(getContext());
+            helper = new RealmHelper(getContext());
+            eventList = helper.getTest();
+            rvEventList = view.findViewById(R.id.rvEventList);
+            System.out.println("Check mParam1: " + mParam1);
+            System.out.println("Check1: " + eventList.size());
+            adapter = new ProgrammeRecyclerViewAdapter(getContext(), helper.getEventFromPresentationDay(p_id, mParam1));
+            rvEventList.setHasFixedSize(true);
+            rvEventList.addItemDecoration(new DividerItemDecoration(getContext(), DividerItemDecoration.VERTICAL));
+            layoutManager = new LinearLayoutManager(getContext());
+            rvEventList.setLayoutManager(layoutManager);
+            rvEventList.setAdapter(adapter);
+        } else if(name.equals("programme")){
+            Realm.init(getContext());
+            helper = new RealmHelper(getContext());
+            eventList = helper.getTest();
+            rvEventList = view.findViewById(R.id.rvEventList);
+            System.out.println("Check mParam1: " + mParam1);
+            System.out.println("Check1: " + eventList.size());
+            adapter = new ProgrammeRecyclerViewAdapter(getContext(), helper.getEventByDay(mParam1));
+            rvEventList.setHasFixedSize(true);
+            rvEventList.addItemDecoration(new DividerItemDecoration(getContext(), DividerItemDecoration.VERTICAL));
+            layoutManager = new LinearLayoutManager(getContext());
+            rvEventList.setLayoutManager(layoutManager);
+            rvEventList.setAdapter(adapter);
+        }
+
+
         return view;
     }
 }
